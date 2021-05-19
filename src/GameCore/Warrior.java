@@ -1,6 +1,7 @@
 package GameCore;
 
 public class Warrior {
+	private int id;
 	private String warriorName;
 	private String imagePath;
 	private String raceName;
@@ -10,7 +11,8 @@ public class Warrior {
 	private int agility;
 	private int defense;
 	
-	public Warrior(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
+	public Warrior(int id, String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
+		this.id=id;
 		this.warriorName=warriorName;
 		this.imagePath=imagePath;
 		this.raceName=raceName;
@@ -83,6 +85,14 @@ public class Warrior {
 
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

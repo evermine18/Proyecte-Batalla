@@ -24,7 +24,7 @@ public class Querys {
 		}
 		
 	}
-	public Warrior[] allWarriors(){
+	public static Warrior[] allWarriors(){
 		Warrior[] warriors = new Warrior[rowCount()];
 		int contador=0;
 		try {
@@ -32,13 +32,13 @@ public class Querys {
 			ResultSet rs = stmnt.executeQuery("SELECT warrior_id, warrior_name, warrior_image_path, race.race_id, race.race_name, race.hp, race.strength, race.speed, race.agility, race.defense FROM warriors JOIN race ON warriors.race_id=race.race_id;");
 			while (rs.next()) {
 				if(rs.getString(5).equals("Humano")) {
-					warriors[contador]=new Humano(rs.getString(2),rs.getString(3));
+					warriors[contador]=new Humano(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
 				else if(rs.getString(5).contains("Nan")) {
-					warriors[contador]=new Nan(rs.getString(2),rs.getString(3));
+					warriors[contador]=new Nan(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
 				else if(rs.getString(5).equals("Elf")) {
-					warriors[contador]=new Elf(rs.getString(2),rs.getString(3));
+					warriors[contador]=new Elf(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
 				//warriors[contador]=new Warrior(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9), rs.getInt(10));
 				/*
@@ -62,7 +62,7 @@ public class Querys {
 		}
 		return warriors;
 	}
-	public int rowCount() {
+	public static int rowCount() {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT COUNT(warrior_id) FROM warriors;");

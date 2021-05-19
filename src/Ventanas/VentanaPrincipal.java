@@ -19,14 +19,42 @@ import SQLCore.Querys;
 
 
 public class VentanaPrincipal extends JFrame {
+	private JButton bChooseCh,bChooseWe,bRanking;
+	private int w;
+	private JPanel content,topPanel;
 	private WarriorPanel panel1, panel2;
-	private TopPanel topPanel;
 	private static Warrior warrior1,warrior2;
 	private Warrior[] warriorList;
 	
 	public VentanaPrincipal() {
-		//warriorList=Querys.allWarriors();
-		topPanel=new TopPanel();
+		//TopPanel 
+		topPanel=new JPanel();
+		bChooseCh=new JButton("Choose Character");
+		bChooseWe=new JButton("Choose Weapon");
+		bRanking=new JButton("Ranking");
+		bChooseCh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ChooseCharWindow cw=	new ChooseCharWindow();
+				warrior1=cw.getW();
+			}
+			
+		});
+		topPanel.add(bChooseCh);
+		bChooseWe.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(warrior1);
+			}
+			
+		});
+		topPanel.add(bChooseWe);
+		topPanel.add(bRanking);
+		this.add(topPanel,BorderLayout.CENTER);
+		warriorList=new Warrior[Querys.rowCount()];
+		warriorList=Querys.allWarriors();
+		//(topPanel=new TopPanel();
+		//Call to the Warriors Panel Constructor
 		panel1=new WarriorPanel("./img/"+ warrior1.getImagePath(),warrior1.getHp(),warrior1.getStrenght(),warrior1.getAgility(),warrior1.getSpeed(),warrior1.getDefense());
 		panel1.setPreferredSize(new Dimension(350,460));
 		panel2=new WarriorPanel("./img/"+ warrior2.getImagePath(),warrior2.getHp(),warrior2.getStrenght(),warrior2.getAgility(),warrior2.getSpeed(),warrior2.getDefense());
@@ -35,7 +63,7 @@ public class VentanaPrincipal extends JFrame {
 		//personaje
 		//end
 		initWarriors();
-		System.out.println(warriorList[topPanel.getW()]);
+		
 		panel1.pbPower.setValue(10);
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
@@ -58,8 +86,8 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		warrior1= new Warrior("No Selected","noselected.png","none",100,3,4,5,6);
-		warrior2= new Warrior("No Selected","noselected.png","none",100,3,4,5,6);
+		warrior1= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6);
+		warrior2= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6);
 		System.out.println(warrior1.getWarriorName());
 		new VentanaPrincipal();
 	}
