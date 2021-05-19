@@ -13,7 +13,7 @@ import GameCore.Warrior;
 
 
 public class Querys {
-	public static ResultSet ejecutarConsulta(String query) {
+	public ResultSet ejecutarConsulta(String query) {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			return stmnt.executeQuery(query);
@@ -24,7 +24,7 @@ public class Querys {
 		}
 		
 	}
-	public static Warrior[] allWarriors(){
+	public Warrior[] allWarriors(){
 		Warrior[] warriors = new Warrior[rowCount()];
 		int contador=0;
 		try {
@@ -62,7 +62,7 @@ public class Querys {
 		}
 		return warriors;
 	}
-	public static int rowCount() {
+	public int rowCount() {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT COUNT(warrior_id) FROM warriors;");
@@ -76,21 +76,6 @@ public class Querys {
 		}
 		return 0;
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ResultSet rs = ejecutarConsulta("SELECT * FROM warriors;");
-		try {
-			while(rs.next()) {
-					System.out.println("ID: "+rs.getString(1));
-					System.out.println("NOMBRE: "+rs.getString(2));
-					System.out.println("DESC: "+rs.getString(3));
-					System.out.println("DINERO: "+rs.getString(4));
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 }
 

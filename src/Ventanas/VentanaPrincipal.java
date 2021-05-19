@@ -22,7 +22,7 @@ public class VentanaPrincipal extends JFrame {
 	private WarriorPanel panel1, panel2;
 	private TopPanel topPanel;
 	private static Warrior warrior1,warrior2;
-	//private Warrior[] warriorList;
+	private Warrior[] warriorList;
 	
 	public VentanaPrincipal() {
 		//warriorList=Querys.allWarriors();
@@ -34,6 +34,8 @@ public class VentanaPrincipal extends JFrame {
 		//panel1.add(boton);
 		//personaje
 		//end
+		initWarriors();
+		System.out.println(warriorList[topPanel.getW()]);
 		panel1.pbPower.setValue(10);
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
@@ -48,8 +50,12 @@ public class VentanaPrincipal extends JFrame {
 			System.out.println(this.getSize());
 		}
 		*/
-	}
 	
+	}
+	public void  initWarriors() {
+		Querys q=new Querys();
+		warriorList=q.allWarriors();
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		warrior1= new Warrior("No Selected","noselected.png","none",100,3,4,5,6);

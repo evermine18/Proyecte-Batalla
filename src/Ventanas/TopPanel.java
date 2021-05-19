@@ -11,7 +11,7 @@ import GameCore.Warrior;
 
 public class TopPanel extends JPanel{
 	private JButton bChooseCh,bChooseWe,bRanking;
-	
+	private int w;
 	private JPanel content;
 	
 	public TopPanel(){
@@ -22,7 +22,8 @@ public class TopPanel extends JPanel{
 		bChooseCh.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				new ChooseCharWindow();
+				ChooseCharWindow cw=	new ChooseCharWindow();
+				w=cw.getW();
 				
 			}
 			
@@ -31,6 +32,9 @@ public class TopPanel extends JPanel{
 		content.add(bChooseWe);
 		content.add(bRanking);
 		this.add(content,BorderLayout.CENTER);
+	}
+	public int getW() {
+		return w;
 	}
 
 }

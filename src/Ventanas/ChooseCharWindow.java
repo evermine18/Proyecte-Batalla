@@ -26,16 +26,20 @@ public class ChooseCharWindow extends JFrame {
 	private BufferedImage img = null;
 	private ImageIcon imagen;
 	private Image dimg;
+	JButton[] bWarriors;
 	private Warrior[] warriorList;
+	int  w,i;
 	//private ImageIcon[] iIcon=new ImageIcon[Querys.rowCount()];
 	
 	public ChooseCharWindow(){
-		warriorList=Querys.allWarriors();
+		Querys q = new Querys();
+		warriorList=q.allWarriors();
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		w=-1;
+		i=-1;
 		loadWarriors(warriorList);
 		this.setVisible(true);
 	}
@@ -43,16 +47,17 @@ public class ChooseCharWindow extends JFrame {
 	public void loadWarriors(Warrior[] warriors) {
 		panel1=new JPanel();
 		
-		JButton[] bWarriors = new JButton[warriors.length];
-		for(int i=0;i<warriors.length;i++) {
+		bWarriors = new JButton[warriors.length];
+		for( i=0;i<warriors.length;i++) {
 			if(ReadPicture("./img/"+warriors[i].getImagePath())==true) {
 				imagen = new ImageIcon(dimg);
 				bWarriors[i] = new JButton(imagen);
 				bWarriors[i].addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent e) {
-						//VentanaPrincipal.setWarrior1(warriors[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
-						
+					//	VentanaPrincipal.setWarrior1(warriorList[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
+						w=i;
+						System.out.println(w);
 					}
 					
 				});
@@ -63,6 +68,9 @@ public class ChooseCharWindow extends JFrame {
 			panel1.add(bWarriors[i]);
 		}
 		this.add(panel1);
+	}
+	public int getW() {
+		return w;
 	}
 	public boolean ReadPicture(String ImageURL) {
 		try {
