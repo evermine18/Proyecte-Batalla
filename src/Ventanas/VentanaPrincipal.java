@@ -101,6 +101,9 @@ public class VentanaPrincipal extends JFrame {
 		warrior1.setAgility(agility);
 		warrior1.setDefense(defense);
 	}
+	public static void setWarrior(Warrior warriorSelected) {
+		warrior1=warriorSelected;
+	}
 	public void setWarrior2(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		warrior2.setWarriorName(warriorName);
 		warrior2.setImagePath(imagePath);

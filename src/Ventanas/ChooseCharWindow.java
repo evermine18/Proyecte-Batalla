@@ -79,12 +79,12 @@ public class ChooseCharWindow extends JFrame {
 				final int id = warrior.getId()-1;
 				imagen = new ImageIcon(dimg);
 				bWarriors[id] = new JButton(imagen);
-				unaid=1;
 				bWarriors[id].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					//	VentanaPrincipal.setWarrior1(warriorList[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
 						System.out.println(id);
 						selectWarrior(id);
+						VentanaPrincipal.setWarrior(warriorList[id]);
 						System.out.println(warriorSelected);
 					}
 					
