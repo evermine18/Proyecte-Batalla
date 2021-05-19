@@ -11,6 +11,10 @@ public class Warrior {
 	private int agility;
 	private int defense;
 	
+	public Warrior() {
+		
+	}
+	
 	public Warrior(int id, String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		this.id=id;
 		this.warriorName=warriorName;
