@@ -42,18 +42,6 @@ public class Querys {
 				else if(rs.getString(5).equals("elf")) {
 					warriors[contador]=new Elf(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(11));
 				}
-				//warriors[contador]=new Warrior(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9), rs.getInt(10));
-				/*
-				warriors[contador][1]=rs.getString(2);
-				warriors[contador][2]=rs.getString(3);
-				warriors[contador][3]=Integer.toString(rs.getInt(4));
-				warriors[contador][4]=rs.getString(5);
-				warriors[contador][5]=Integer.toString(rs.getInt(6));
-				warriors[contador][6]=Integer.toString(rs.getInt(7));
-				warriors[contador][7]=Integer.toString(rs.getInt(8));
-				warriors[contador][8]=Integer.toString(rs.getInt(9));
-				warriors[contador][9]=Integer.toString(rs.getInt(10));
-				*/
 				contador++;
 			}
 			
@@ -72,7 +60,6 @@ public class Querys {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT weapon_id, weapon_name, weapon_image_path, strength, speed, weapon_race, points FROM weapons WHERE weapon_race LIKE '%"+raceName+"%';");
 			while (rs.next()) {
-					System.out.println(rs.getInt(1)+" Me voy a ejecutar pero de muerto "+ contador);
 					weapons[contador]=new Weapon(contador+1,rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(7));
 				contador++;
 			}
@@ -82,7 +69,6 @@ public class Querys {
 			System.out.println("MYSQL: No se ha podido ejecutar la consulta");
 			return null;
 		}
-		//System.out.println(weapons[4].getWeaponName()+ "MorenoMaricon");
 		return weapons;
 	}
 	public static int rowCount(String table) {
@@ -104,7 +90,6 @@ public class Querys {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT COUNT(weapon_id) FROM "+table+" WHERE weapon_race LIKE '%"+raceName+"%';");
 			while(rs.next()) {
-				System.out.println("EEEEEEE "+rs.getInt(1));
 				return rs.getInt(1);
 		}
 		}
@@ -140,7 +125,6 @@ public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,i
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT battle_id, player_id, warrior_id, weapon_id, opponent_id, opponent_weapon_id, injures_caused,injures_suffered,battle_points FROM battles ORDER BY battle_points DESC LIMIT 10;");
 			while (rs.next()) {
-					System.out.println(rs.getInt(1)+" Me voy a ejecutar pero de muerto "+ contador);
 					topPlayers[contador][0]=Integer.toString(rs.getInt(1));
 					topPlayers[contador][1]=Integer.toString(rs.getInt(2));
 					topPlayers[contador][2]=Integer.toString(rs.getInt(3));

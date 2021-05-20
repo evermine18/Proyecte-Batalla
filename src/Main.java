@@ -1,11 +1,11 @@
-import Ventanas.VentanaPrincipal;
+import Ventanas.MainWindow;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Proyecto");
-		new VentanaPrincipal();
+		new MainWindow();
 	}
 
 }

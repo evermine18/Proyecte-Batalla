@@ -26,13 +26,13 @@ public class EndFightWindow extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (pWins==1) {
-					VentanaPrincipal.updateWar2();
-					VentanaPrincipal.setHpValueW1(hp);
+					MainWindow.updateWar2();
+					MainWindow.setHpValueW1(hp);
 				}
 				else {
-					VentanaPrincipal.updateWar1("noselected.png", 0, 0, 0, 0, 0);
-					VentanaPrincipal.setHpValueW2(hp);
-					VentanaPrincipal.enableCW();
+					MainWindow.updateWar1("noselected.png", 0, 0, 0, 0, 0);
+					MainWindow.setHpValueW2(hp);
+					MainWindow.enableCW();
 				}
 				CloseWindow();
 				

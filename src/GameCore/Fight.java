@@ -2,7 +2,7 @@ package GameCore;
 
 import java.util.Random;
 
-import Ventanas.VentanaPrincipal;
+import Ventanas.MainWindow;
 
 public class Fight {
 	private int turn, injuresP1,injuresP2;
@@ -33,17 +33,17 @@ public class Fight {
 				}
 			}
 			//Printamos turno
-			VentanaPrincipal.printConsole("Info: Player "+turn+" turn");
+			MainWindow.printConsole("Info: Player "+turn+" turn");
 			if (turn==1) {
 				rand1=rand.nextInt(101);
 				if(warrior1.getAgility()*10>rand1) {
 					rand2=rand.nextInt(51);
 					if(warrior2.getAgility()<rand2) {
 						warrior2.setHp(warrior2.getHp()-((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense()));
-						VentanaPrincipal.printConsole("Info: Player 2 has taken "+(warrior2.getHp()-((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense()))+" points of damage ");
+						MainWindow.printConsole("Info: Player 2 has taken "+(warrior2.getHp()-((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense()))+" points of damage ");
 						injuresP2=injuresP2+((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense());
-						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
-						VentanaPrincipal.setHpValueW2(warrior2.getHp());
+						MainWindow.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
+						MainWindow.setHpValueW2(warrior2.getHp());
 						if((warrior1.getSpeed()+weapon1.getSpeed())<=(warrior2.getSpeed()+weapon2.getSpeed())){
 							turn=2;
 						}
@@ -58,11 +58,11 @@ public class Fight {
 						}
 					}
 					else {
-						VentanaPrincipal.printConsole("Info: Player 2 has dodged the attack");
+						MainWindow.printConsole("Info: Player 2 has dodged the attack");
 					}
 				}
 				else {
-					VentanaPrincipal.printConsole("Info: Player "+turn+" attack was unsuccessful ");
+					MainWindow.printConsole("Info: Player "+turn+" attack was unsuccessful ");
 				}
 			}
 			else {
@@ -71,9 +71,9 @@ public class Fight {
 					rand2=rand.nextInt(51);
 					if(warrior1.getAgility()<rand2) {
 						warrior1.setHp(warrior1.getHp()-((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense()));
-						VentanaPrincipal.printConsole("Info: Player 1 has taken "+(warrior1.getHp()-((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense()))+" points of damage ");
-						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
-						VentanaPrincipal.setHpValueW1(warrior1.getHp());
+						MainWindow.printConsole("Info: Player 1 has taken "+(warrior1.getHp()-((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense()))+" points of damage ");
+						MainWindow.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
+						MainWindow.setHpValueW1(warrior1.getHp());
 						injuresP1=injuresP1+((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense());
 						if((warrior2.getSpeed()+weapon2.getSpeed())<=(warrior1.getSpeed()+weapon1.getSpeed())){
 							turn=1;
@@ -89,23 +89,23 @@ public class Fight {
 						}
 					}
 					else {
-						VentanaPrincipal.printConsole("Info: Player 1 has dodged the attack");
+						MainWindow.printConsole("Info: Player 1 has dodged the attack");
 					}
 				}
 				else {
-					VentanaPrincipal.printConsole("Info: Player "+turn+" attack was unsuccessful ");
+					MainWindow.printConsole("Info: Player "+turn+" attack was unsuccessful ");
 				}
 			}
 		}
 		if(warrior1.getHp()<=0) {
-			VentanaPrincipal.printConsole("Info: Player 2 wins ");
+			MainWindow.printConsole("Info: Player 2 wins ");
 			SQLCore.Querys.InsertarBattle(warrior2.getId(), weapon2.getId(), warrior1.getId(), weapon1.getId(), injuresP1, injuresP2, warrior1.getPoints()+weapon1.getPoints());
-			VentanaPrincipal.endFight(2);
+			MainWindow.endFight(2);
 		}
 		else {
-			VentanaPrincipal.printConsole("Info: Player 1 wins ");
+			MainWindow.printConsole("Info: Player 1 wins ");
 			SQLCore.Querys.InsertarBattle(warrior1.getId(), weapon1.getId(), warrior2.getId(), weapon2.getId(), injuresP2, injuresP1, warrior2.getPoints()+weapon2.getPoints());
-			VentanaPrincipal.endFight(1);
+			MainWindow.endFight(1);
 		}
 	}
 

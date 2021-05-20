@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GameCore.Warrior;
-import Ventanas.VentanaPrincipal;
+import Ventanas.MainWindow;
 
 public class ChooseCharWindow extends JFrame {
 	
@@ -62,7 +62,7 @@ public class ChooseCharWindow extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println(id);
 						selectWarrior(id);
-						VentanaPrincipal.setWarrior(warriorList[id]);
+						MainWindow.setWarrior(warriorList[id]);
 						System.out.println(warriorSelected);
 					}
 					
@@ -84,7 +84,7 @@ public class ChooseCharWindow extends JFrame {
 	
 	public void selectWarrior(int numWar) {
 		warriorSelected=warriorList[numWar];
-		VentanaPrincipal.updateWar1(warriorList[numWar].getImagePath(),warriorList[numWar].getHp(),warriorList[numWar].getStrenght(),warriorList[numWar].getSpeed(),warriorList[numWar].getAgility(),warriorList[numWar].getDefense());
+		MainWindow.updateWar1(warriorList[numWar].getImagePath(),warriorList[numWar].getHp(),warriorList[numWar].getStrenght(),warriorList[numWar].getSpeed(),warriorList[numWar].getAgility(),warriorList[numWar].getDefense());
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	
@@ -93,7 +93,7 @@ public class ChooseCharWindow extends JFrame {
 		    img = ImageIO.read(new File(ImageURL));
 		} catch (IOException e) {
 		    e.printStackTrace();
-		    System.out.println("Debug: ERROR AL CARGAR LA IMAGEN");
+		    System.out.println("Debug: Error to load the image");
 		    return false;
 		}
 		dimg = img.getScaledInstance(195,258,

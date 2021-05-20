@@ -26,7 +26,6 @@ public class ChooseWeapWindow extends JFrame{
 	private BufferedImage img = null;
 	private ImageIcon imagen;
 	private Image dimg;
-	private int unaid;
 	private JButton[] bWeapons;
 	private Weapon[] weaponList;
 	private Weapon weaponSelected;
@@ -59,7 +58,7 @@ public class ChooseWeapWindow extends JFrame{
 					public void actionPerformed(ActionEvent e) {
 						System.out.println(id);
 						selectWarrior(id);
-						VentanaPrincipal.setWeapon(weaponList[id]);
+						MainWindow.setWeapon(weaponList[id]);
 						System.out.println(weaponSelected);
 					}
 					
@@ -80,7 +79,7 @@ public class ChooseWeapWindow extends JFrame{
 	
 	public void selectWarrior(int numWar) {
 		weaponSelected=weaponList[numWar];
-		VentanaPrincipal.updateWar1(weaponList[numWar].getStrenght(), weaponList[numWar].getSpeed());
+		MainWindow.updateWar1(weaponList[numWar].getStrenght(), weaponList[numWar].getSpeed());
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	
@@ -89,7 +88,7 @@ public class ChooseWeapWindow extends JFrame{
 		    img = ImageIO.read(new File(ImageURL));
 		} catch (IOException e) {
 		    e.printStackTrace();
-		    System.out.println("Debug: ERROR AL CARGAR LA IMAGEN" + ImageURL);
+		    System.out.println("Debug: Error to load the image" + ImageURL);
 		    return false;
 		}
 		dimg = img.getScaledInstance(195,258,

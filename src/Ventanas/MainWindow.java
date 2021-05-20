@@ -30,11 +30,11 @@ import GameCore.Weapon;
 import SQLCore.Querys;
 
 
-public class VentanaPrincipal extends JFrame {
+public class MainWindow extends JFrame {
 	private static JButton bChooseCh, bChooseWe, bRanking, bFight, bClearConsole;
 	private static int w1maxHealth;
 	private static int w2maxHealth;
-	private JPanel content,topPanel, fightPanel,consolePanel;
+	private JPanel content,topPanel, fightPanel;
 	private static WarriorPanel panel1;
 	private static WarriorPanel panel2;
 	private static Warrior warrior1,warrior2;
@@ -43,25 +43,19 @@ public class VentanaPrincipal extends JFrame {
 	private static JTextArea console;
 	private JScrollPane jsp;
 	
-	public VentanaPrincipal() {
-		//TopPanel 
+	public MainWindow() {
+		//Comprobamos si hay conexion a la bd
 		if(SQLCore.SQLCore.Connection()==null) {
 			System.out.println("ERROR: The connection to the database could not be created ");
 			JOptionPane.showOptionDialog(rootPane, "Could not connect to the database!!!","DB ERROR", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
-			System.exit(0);
+			System.exit(0);//Sale del programa si no ha tenido exito
 		}
+		//TopPanel
 		topPanel=new JPanel();
-		fightPanel=new JPanel();
-		consolePanel= new JPanel();
+		//Character Button
 		bChooseCh=new JButton("Choose Character");
 		bChooseCh.setBackground(new Color(5,151,242));
 		bChooseCh.setForeground(Color.WHITE);
-		bChooseWe=new JButton("Choose Weapon");
-		bChooseWe.setForeground(Color.WHITE);
-		bChooseWe.setBackground(new Color(5,151,242));
-		bRanking=new JButton("Ranking");
-		bRanking.setForeground(Color.WHITE);
-		bRanking.setBackground(new Color(5,151,242));
 		bChooseCh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bChooseCh.setEnabled(false);
@@ -72,10 +66,13 @@ public class VentanaPrincipal extends JFrame {
 			
 		});
 		topPanel.add(bChooseCh);
+		//Weapon Button
+		bChooseWe=new JButton("Choose Weapon");
+		bChooseWe.setForeground(Color.WHITE);
+		bChooseWe.setBackground(new Color(5,151,242));
 		bChooseWe.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println(warrior1);
 				bChooseCh.setEnabled(false);
 				bChooseWe.setEnabled(false);
@@ -84,39 +81,37 @@ public class VentanaPrincipal extends JFrame {
 			}
 			
 		});
-		bChooseWe.setEnabled(false);
 		topPanel.add(bChooseWe);
+		//Ranking Button
+		bRanking=new JButton("Ranking");
+		bRanking.setForeground(Color.WHITE);
+		bRanking.setBackground(new Color(5,151,242));
 		bRanking.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//updateWar2();
 				new RankingWindow();
 			}
 			
 		});
+		bChooseWe.setEnabled(false);
 		topPanel.add(bRanking);
-		this.add(topPanel,BorderLayout.CENTER);
+		
+		//Llamadas a los constructores de el Panel 1 y 2 donde se muestran los stats de los personajes
 		warriorList=new Warrior[Querys.rowCount("warriors")];
 		warriorList=Querys.allWarriors();
-		//(topPanel=new TopPanel();
-		//Call to the Warriors Panel Constructor
 		panel1=new WarriorPanel("./img/"+ warrior1.getImagePath(),warrior1.getHp(),warrior1.getStrenght(),warrior1.getAgility(),warrior1.getSpeed(),warrior1.getDefense());
 		panel1.setPreferredSize(new Dimension(350,460));
 		panel2=new WarriorPanel("./img/"+ warrior2.getImagePath(),warrior2.getHp(),warrior2.getStrenght(),warrior2.getAgility(),warrior2.getSpeed(),warrior2.getDefense());
 		panel2.setPreferredSize(new Dimension(350,460));
 		
-		//panel1.add(boton);
-		//personaje
-		//end
-		//Botones de Fight y Clear Console
+		//Panel Fight and Console
+		fightPanel=new JPanel();
 		bFight=new JButton("Fight");
 		bFight.setForeground(Color.WHITE);
 		bFight.setBackground(new Color(3,140,62));
 		bFight.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(warrior2.getRaceName().equals("none")) {
 					updateWar2();
 				}
@@ -131,34 +126,28 @@ public class VentanaPrincipal extends JFrame {
 		bClearConsole.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				console.setText("");
+				console.setText("");//Seteamos la consola en blanco
 			}
 			
 		});
 		fightPanel.add(bClearConsole);
 		bFight.setEnabled(false);
 		console=new JTextArea("",8,60);
+		console.setEditable(false);
 		jsp=new JScrollPane(console);
 		fightPanel.add(jsp);
 		fightPanel.setPreferredSize(new Dimension(100,200));
 		
+		// JFRAME Config
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
 		this.add(panel2,BorderLayout.LINE_END);
 		this.add(fightPanel,BorderLayout.PAGE_END);
-		//this.add(consolePanel,BorderLayout.PAGE_END);
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,700);
 		this.setMinimumSize(new Dimension(770, 700));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		/*
-		while (true) {
-			System.out.println(this.getSize());
-		}
-		*/
-	
 	}
 	public void  initWarriors() {
 		Querys q=new Querys();
@@ -172,7 +161,7 @@ public class VentanaPrincipal extends JFrame {
 		warrior1= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
 		warrior2= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
 		System.out.println(warrior1.getWarriorName());
-		new VentanaPrincipal();
+		new MainWindow();
 	}
 	public static void setWarrior1(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		warrior1.setWarriorName(warriorName);

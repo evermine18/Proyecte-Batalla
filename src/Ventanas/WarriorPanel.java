@@ -29,12 +29,11 @@ class WarriorPanel extends JPanel{
 	private Image dimg;
 	private ImageIcon imagen;
 	protected JProgressBar pr, pbPower, pbAgility, pbSpeed, pbDefense;
-	private JPanel statsPanel, warriorPanel;
+	private JPanel statsPanel;
 	
 	
 	public WarriorPanel(String ImageURL,int hp,int vPower,int vAgility, int vSpeed,int vDefense) {
 		
-		warriorPanel=new JPanel();
 		//Carga la imagen como BufferedImage para poderla redimensionar y la convertimos a ImageIcon
 		if(ReadPicture(ImageURL)==true) {
 			imagen = new ImageIcon(dimg);
@@ -43,6 +42,7 @@ class WarriorPanel extends JPanel{
 		else {
 			label = new JLabel("Imagen no encontrada");
 		}
+		//Barra de Vida
 		pr=new JProgressBar(0,100);
 		pr.setBackground(Color.WHITE);
 		pr.setBorder(BorderFactory.createLineBorder(new Color(60,174,163)));
@@ -51,7 +51,7 @@ class WarriorPanel extends JPanel{
 		pr.setStringPainted(true);
 		this.add(pr);
 		this.add(label);
-		//this.add(warriorPanel, BorderLayout.CENTER);
+		//Llamada a las barras de Fuerza,Agilidad, etc..
 		stats(vPower,vAgility,vSpeed,vDefense);
 		
 		
@@ -99,7 +99,7 @@ class WarriorPanel extends JPanel{
 		
 		
 	}
-	
+	//Funcion la cual le pasas una imagen cargada y la actualiza
 	public void updateImage(String imagePath) {
 		System.out.println("./img/"+imagePath);
 		try {
@@ -114,21 +114,18 @@ class WarriorPanel extends JPanel{
 		label.setIcon(imagen);
 		this.revalidate();
 		this.repaint();
-		//JLabel tempimg = new JLabel(new ImageIcon(dimg));
-		//lImg= tempimg;
-		
 	}
-	
+	//Funcion la cual le paas la URL de la imagen y la carga si el directorio es valido
 	public boolean ReadPicture(String ImageURL) {
 		try {
 		    img = ImageIO.read(new File(ImageURL));
 		} catch (IOException e) {
 		    e.printStackTrace();
 		    System.out.println("Debug: ERROR AL CARGAR LA IMAGEN");
-		    return false;
+		    return false; //Return false si no se ha podido cargar
 		}
 		dimg = img.getScaledInstance(195,258,
 		        Image.SCALE_SMOOTH);
-		return true;
+		return true; //Return true si no se ha podido cargar
 	}
 }
