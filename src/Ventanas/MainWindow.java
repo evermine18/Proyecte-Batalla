@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 import GameCore.Fight;
 import GameCore.Warrior;
@@ -43,6 +45,7 @@ public class MainWindow extends JFrame {
 		}
 		//TopPanel
 		topPanel=new JPanel();
+		topPanel.setBackground(new Color(80,227,194));
 		//Character Button
 		bChooseCh=new JButton("Choose Character");
 		bChooseCh.setBackground(new Color(5,151,242));
@@ -92,8 +95,10 @@ public class MainWindow extends JFrame {
 		warriorList=Querys.allWarriors();
 		panel1=new WarriorPanel("./img/"+ warrior1.getImagePath(),warrior1.getHp(),warrior1.getStrenght(),warrior1.getAgility(),warrior1.getSpeed(),warrior1.getDefense());
 		panel1.setPreferredSize(new Dimension(350,460));
+		panel1.setBackground(new Color(132,235,212));
 		panel2=new WarriorPanel("./img/"+ warrior2.getImagePath(),warrior2.getHp(),warrior2.getStrenght(),warrior2.getAgility(),warrior2.getSpeed(),warrior2.getDefense());
 		panel2.setPreferredSize(new Dimension(350,460));
+		panel2.setBackground(new Color(132,235,212));
 		
 		//Panel Fight and Console
 		fightPanel=new JPanel();
@@ -111,6 +116,7 @@ public class MainWindow extends JFrame {
 			
 		});
 		fightPanel.add(bFight);
+		fightPanel.setBackground(new Color(80,227,194));
 		bClearConsole=new JButton("Clear Console");
 		bClearConsole.setForeground(Color.WHITE);
 		bClearConsole.setBackground(new Color(242,53,53));
@@ -134,6 +140,7 @@ public class MainWindow extends JFrame {
 		this.add(panel1,BorderLayout.LINE_START);
 		this.add(panel2,BorderLayout.LINE_END);
 		this.add(fightPanel,BorderLayout.PAGE_END);
+		this.getContentPane().setBackground(new Color(80,227,194));
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,700);
 		this.setMinimumSize(new Dimension(770, 700));
@@ -227,6 +234,7 @@ public class MainWindow extends JFrame {
 	public static void setHpValueW1(int hp) {
 		panel1.pr.setValue(hp);
 		warrior1.setHp(hp);
+		
 	}
 	public static void setHpValueW2(int hp) {
 		panel2.pr.setValue(hp);
@@ -238,7 +246,7 @@ public class MainWindow extends JFrame {
 		bChooseWe.setEnabled(false);
 		bRanking.setEnabled(false);
 		bFight.setEnabled(false);
-		bClearConsole.setEnabled(false);
+		//bClearConsole.setEnabled(false);
 		if(playerWins==1) {
 			new EndFightWindow(w1maxHealth, playerWins);
 		}
@@ -247,6 +255,8 @@ public class MainWindow extends JFrame {
 		}
 		
 	}
+	
+
 	//Activa los botones para elegir Personaje otra vez
 	public static void enableCW() {
 		bChooseCh.setEnabled(true);
@@ -264,7 +274,7 @@ public class MainWindow extends JFrame {
 		
 	}
 	//Llamada principal
-		public static void main(String[] args) {
+		public static void main(String[] args) throws InterruptedException {
 			// TODO Auto-generated method stub
 			warrior1= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
 			warrior2= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);

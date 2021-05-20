@@ -1,6 +1,12 @@
 package GameCore;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
+
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import Ventanas.MainWindow;
 
@@ -8,6 +14,7 @@ public class Fight {
 	private int turn, injuresP1,injuresP2;
 	private int rand1, rand2;
 	public Fight(Warrior warrior1, Weapon weapon1, Warrior warrior2, Weapon weapon2) {
+		
 		injuresP1=0;
 		injuresP2=0;
 		turn=0;
@@ -96,7 +103,9 @@ public class Fight {
 					MainWindow.printConsole("Info: Player "+turn+" attack was unsuccessful ");
 				}
 			}
+
 		}
+		
 		if(warrior1.getHp()<=0) {
 			MainWindow.printConsole("Info: Player 2 wins ");
 			SQLCore.Querys.InsertarBattle(warrior2.getId(), weapon2.getId(), warrior1.getId(), weapon1.getId(), injuresP1, injuresP2, warrior1.getPoints()+weapon1.getPoints());
@@ -107,6 +116,27 @@ public class Fight {
 			SQLCore.Querys.InsertarBattle(warrior1.getId(), weapon1.getId(), warrior2.getId(), weapon2.getId(), injuresP2, injuresP1, warrior2.getPoints()+weapon2.getPoints());
 			MainWindow.endFight(1);
 		}
+	}
+	
+	public void threadSleep(int seconds) {
+
+		try {
+			SwingUtilities.invokeAndWait(() -> {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }

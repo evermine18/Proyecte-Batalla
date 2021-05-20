@@ -47,8 +47,8 @@ public class ChooseWeapWindow extends JFrame{
 		bWeapons = new JButton[weaponList.length];
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Weapon weapons: weaponList) {
-			if(ReadPicture("./img/"+weapons.getImagePath())==true) {
-				final int id = weapons.getId()-1;
+			final int id = weapons.getId()-1;
+			if(ReadPicture("./img/"+weaponList[id].getImagePath())==true) {
 				imagen = new ImageIcon(dimg);
 				bWeapons[id] = new JButton(imagen);
 				bWeapons[id].setBackground(Color.WHITE);

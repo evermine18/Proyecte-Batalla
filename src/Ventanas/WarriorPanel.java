@@ -2,7 +2,7 @@ package Ventanas;
 
 
 import java.awt.Color;
-
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -40,8 +40,8 @@ class WarriorPanel extends JPanel{
 		//Barra de Vida
 		pr=new JProgressBar(0,100);
 		pr.setBackground(Color.WHITE);
-		pr.setBorder(BorderFactory.createLineBorder(new Color(60,174,163)));
-		pr.setForeground(new Color(44,128,120));
+		pr.setBorder(BorderFactory.createLineBorder(new Color(174,241,65)));
+		pr.setForeground(new Color(174,241,65));
 		pr.setValue(hp);
 		pr.setStringPainted(true);
 		this.add(pr);
@@ -54,12 +54,13 @@ class WarriorPanel extends JPanel{
 	}
 	public void stats(int vPower,int vAgility, int vSpeed,int vDefense) {
 		statsPanel= new JPanel(new GridLayout(4,2,10,10));
+		statsPanel.setBackground(new Color(132,235,212));
 		//POWER BAR AND LABEL
 		power=new JLabel("Power");
 		statsPanel.add(power);
 		pbPower=new JProgressBar(0,100);
-		pbPower.setBorder(BorderFactory.createLineBorder(new Color(197,69,47)));
-		pbPower.setForeground(new Color(237,85,59));
+		pbPower.setBorder(BorderFactory.createLineBorder(new Color(255,154,162)));
+		pbPower.setForeground(new Color(255,154,162));
 		pbPower.setValue(vPower);
 		pbPower.setStringPainted(true);
 		statsPanel.add(pbPower);
@@ -67,8 +68,8 @@ class WarriorPanel extends JPanel{
 		agility=new JLabel("Agility");
 		statsPanel.add(agility);
 		pbAgility=new JProgressBar(0,100);
-		pbAgility.setBorder(BorderFactory.createLineBorder(new Color(211,182,77)));
-		pbAgility.setForeground(new Color(246,213,92));
+		pbAgility.setBorder(BorderFactory.createLineBorder(new Color(255,218,193)));
+		pbAgility.setForeground(new Color(255,218,193));
 		pbAgility.setValue(vAgility);
 		pbAgility.setStringPainted(true);;
 		statsPanel.add(pbAgility);
@@ -76,8 +77,8 @@ class WarriorPanel extends JPanel{
 		speed=new JLabel("Speed");
 		statsPanel.add(speed);
 		pbSpeed=new JProgressBar(0,100);
-		pbSpeed.setBorder(BorderFactory.createLineBorder(new Color(23,70,110)));
-		pbSpeed.setForeground(new Color(32,99,155));
+		pbSpeed.setBorder(BorderFactory.createLineBorder(new Color(226,240,203)));
+		pbSpeed.setForeground(new Color(226,240,203));
 		pbSpeed.setValue(vSpeed);
 		pbSpeed.setStringPainted(true);
 		statsPanel.add(pbSpeed);
@@ -85,8 +86,8 @@ class WarriorPanel extends JPanel{
 		defense=new JLabel("Defense");
 		statsPanel.add(defense);
 		pbDefense=new JProgressBar(0,100);
-		pbDefense.setBorder(BorderFactory.createLineBorder(new Color(10,26,39)));
-		pbDefense.setForeground(new Color(23,63,95));
+		pbDefense.setBorder(BorderFactory.createLineBorder(new Color(199,206,234)));
+		pbDefense.setForeground(new Color(199,206,234));
 		pbDefense.setValue(vDefense);
 		pbDefense.setStringPainted(true);
 		statsPanel.add(pbDefense);

@@ -39,19 +39,20 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
-		loadWarriors(warriorList);
+		loadWarriors();
 		this.setVisible(true);
 	}
 	
-	public void loadWarriors(Warrior[] warriors) {
+	public void loadWarriors() {
 		panel1=new JPanel();
 		
 		bWarriors = new JButton[warriorList.length];
 		
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Warrior warrior: warriorList) {
-			if(ReadPicture("./img/"+warrior.getImagePath())==true) {
-				final int id = warrior.getId()-1;
+			final int id = warrior.getId()-1;
+			if(ReadPicture("./img/"+warriorList[id].getImagePath())==true) {
+				System.out.println("ImagePath "+warriorList[id].getImagePath());
 				imagen = new ImageIcon(dimg);
 				bWarriors[id] = new JButton(imagen);
 				bWarriors[id].setBackground(Color.WHITE);
@@ -62,15 +63,17 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 						selectWarrior(id);
 						MainWindow.setWarrior(warriorList[id]);
 						System.out.println(warriorSelected);
+						
 					}
 					
 				});
 			}
 			else {
-				bWarriors[warrior.getId()-1] = new JButton(warriors[warrior.getId()-1].getWarriorName());
+				bWarriors[id] = new JButton(warriorList[id].getWarriorName());
 			}
 			
-			panel1.add(bWarriors[warrior.getId()-1]);
+			panel1.add(bWarriors[id]);
+
 		}
 		
 		this.add(panel1);
