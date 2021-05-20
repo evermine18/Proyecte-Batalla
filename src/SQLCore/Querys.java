@@ -133,6 +133,34 @@ public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,i
 			e.printStackTrace();
 		}
 	}
+	public static String[][] getRanking(){
+		String[][] topPlayers = new String[10][9];
+		int contador=0;
+		try {
+			Statement stmnt = SQLCore.Connection().createStatement();
+			ResultSet rs = stmnt.executeQuery("SELECT battle_id, player_id, warrior_id, weapon_id, opponent_id, opponent_weapon_id, injures_caused,injures_suffered,battle_points FROM battles ORDER BY battle_points DESC LIMIT 10;");
+			while (rs.next()) {
+					System.out.println(rs.getInt(1)+" Me voy a ejecutar pero de muerto "+ contador);
+					topPlayers[contador][0]=Integer.toString(rs.getInt(1));
+					topPlayers[contador][1]=Integer.toString(rs.getInt(2));
+					topPlayers[contador][2]=Integer.toString(rs.getInt(3));
+					topPlayers[contador][3]=Integer.toString(rs.getInt(4));
+					topPlayers[contador][4]=Integer.toString(rs.getInt(5));
+					topPlayers[contador][5]=Integer.toString(rs.getInt(6));
+					topPlayers[contador][6]=Integer.toString(rs.getInt(7));
+					topPlayers[contador][7]=Integer.toString(rs.getInt(8));
+					topPlayers[contador][8]=Integer.toString(rs.getInt(9));
+				contador++;
+			}
+			
+		}
+		catch(SQLException e) {
+			System.out.println("MYSQL: No se ha podido ejecutar la consulta");
+			return null;
+		}
+		//System.out.println(weapons[4].getWeaponName()+ "MorenoMaricon");
+		return topPlayers;
+	}
 	
 }
 

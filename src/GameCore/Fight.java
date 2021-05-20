@@ -39,7 +39,7 @@ public class Fight {
 						warrior2.setHp(warrior2.getHp()-((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense()));
 						VentanaPrincipal.printConsole("Info: Player 2 has taken "+(warrior2.getHp()-((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense()))+" points of damage ");
 						injuresP2=injuresP2+((warrior1.getStrenght()+weapon1.getStrenght())-warrior2.getDefense());
-						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +"Player 2 health "+warrior2.getHp());
+						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
 						VentanaPrincipal.setHpValueW2(warrior2.getHp());
 						if((warrior1.getSpeed()+weapon1.getSpeed())<=(warrior2.getSpeed()+weapon2.getSpeed())){
 							turn=2;
@@ -69,7 +69,7 @@ public class Fight {
 					if(warrior1.getAgility()<rand2) {
 						warrior1.setHp(warrior1.getHp()-((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense()));
 						VentanaPrincipal.printConsole("Info: Player 1 has taken "+(warrior1.getHp()-((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense()))+" points of damage ");
-						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +"Player 2 health "+warrior2.getHp());
+						VentanaPrincipal.printConsole("Info: Player 1 health "+ warrior1.getHp() +" Player 2 health "+warrior2.getHp());
 						VentanaPrincipal.setHpValueW1(warrior1.getHp());
 						injuresP1=injuresP1+((warrior2.getStrenght()+weapon2.getStrenght())-warrior1.getDefense());
 						if((warrior2.getSpeed()+weapon2.getSpeed())<=(warrior1.getSpeed()+weapon1.getSpeed())){

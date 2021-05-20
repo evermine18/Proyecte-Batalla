@@ -80,6 +80,7 @@ public class VentanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//updateWar2();
+				new RankingWindow();
 			}
 			
 		});
@@ -153,8 +154,8 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		warrior1= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6,0);
-		warrior2= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6,0);
+		warrior1= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
+		warrior2= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
 		System.out.println(warrior1.getWarriorName());
 		new VentanaPrincipal();
 	}
