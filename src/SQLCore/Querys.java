@@ -1,5 +1,6 @@
 package SQLCore;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,16 +31,16 @@ public class Querys {
 		int contador=0;
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
-			ResultSet rs = stmnt.executeQuery("SELECT warrior_id, warrior_name, warrior_image_path, race.race_id, race.race_name, race.hp, race.strength, race.speed, race.agility, race.defense FROM warriors JOIN race ON warriors.race_id=race.race_id;");
+			ResultSet rs = stmnt.executeQuery("SELECT warrior_id, warrior_name, warrior_image_path, race.race_id, race.race_name, race.hp, race.strength, race.speed, race.agility, race.defense, race.points FROM warriors JOIN race ON warriors.race_id=race.race_id;");
 			while (rs.next()) {
 				if(rs.getString(5).equals("human")) {
-					warriors[contador]=new Humano(rs.getInt(1),rs.getString(2),rs.getString(3));
+					warriors[contador]=new Humano(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(11));
 				}
 				else if(rs.getString(5).contains("nan")) {
-					warriors[contador]=new Nan(rs.getInt(1),rs.getString(2),rs.getString(3));
+					warriors[contador]=new Nan(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(11));
 				}
 				else if(rs.getString(5).equals("elf")) {
-					warriors[contador]=new Elf(rs.getInt(1),rs.getString(2),rs.getString(3));
+					warriors[contador]=new Elf(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(11));
 				}
 				//warriors[contador]=new Warrior(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9), rs.getInt(10));
 				/*
@@ -69,10 +70,10 @@ public class Querys {
 		try {
 			System.out.println(raceName);
 			Statement stmnt = SQLCore.Connection().createStatement();
-			ResultSet rs = stmnt.executeQuery("SELECT weapon_id, weapon_name, weapon_image_path, strength, speed, weapon_race FROM weapons WHERE weapon_race LIKE '%"+raceName+"%';");
+			ResultSet rs = stmnt.executeQuery("SELECT weapon_id, weapon_name, weapon_image_path, strength, speed, weapon_race, points FROM weapons WHERE weapon_race LIKE '%"+raceName+"%';");
 			while (rs.next()) {
 					System.out.println(rs.getInt(1)+" Me voy a ejecutar pero de muerto "+ contador);
-					weapons[contador]=new Weapon(contador+1,rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5));
+					weapons[contador]=new Weapon(contador+1,rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getInt(7));
 				contador++;
 			}
 			
@@ -112,6 +113,25 @@ public class Querys {
 			return 0;
 		}
 		return 0;
+	}
+public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,int opponent_weapon_id, int injures_caused, int injures_suffered, int battle_points) {
+		
+		try {
+			PreparedStatement pstm=SQLCore.Connection().prepareStatement("INSERT INTO battles"
+					+ "(battle_id, player_id, warrior_id, weapon_id, opponent_id, opponent_weapon_id, injures_caused,injures_suffered,battle_points) values(0,1,?,?,?,?,?,?,?)"	);
+			pstm.setInt(1, warrior_id);
+			pstm.setInt(2, weapon_id);
+			pstm.setInt(3, opponent_id);
+			pstm.setInt(4, opponent_weapon_id);
+			pstm.setInt(5, injures_caused);
+			pstm.setInt(6, injures_suffered);
+			pstm.setInt(7, battle_points);
+			pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

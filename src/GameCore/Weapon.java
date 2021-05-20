@@ -6,17 +6,19 @@ public class Weapon {
 	private String imagePath;
 	private int strenght;
 	private int speed;
+	private int points;
 	
 	public Weapon() {
 		
 	}
 	
-	public Weapon(int id, String weaponName, String imagePath, int strenght, int speed) {
+	public Weapon(int id, String weaponName, String imagePath, int strenght, int speed, int points) {
 		this.id = id;
 		this.weaponName = weaponName;
 		this.imagePath = imagePath;
 		this.strenght = strenght;
 		this.speed = speed;
+		this.points = points;
 	}
 
 	public int getId() {
@@ -57,6 +59,14 @@ public class Weapon {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	
 	

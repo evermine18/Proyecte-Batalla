@@ -24,6 +24,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import GameCore.Fight;
 import GameCore.Warrior;
 import GameCore.Weapon;
 import SQLCore.Querys;
@@ -31,14 +32,15 @@ import SQLCore.Querys;
 
 public class VentanaPrincipal extends JFrame {
 	private static JButton bChooseCh, bChooseWe, bRanking, bFight, bClearConsole;
-	private int w;
+	private static int w1maxHealth;
+	private static int w2maxHealth;
 	private JPanel content,topPanel, fightPanel,consolePanel;
 	private static WarriorPanel panel1;
 	private static WarriorPanel panel2;
 	private static Warrior warrior1,warrior2;
 	private Warrior[] warriorList;
 	private static Weapon weapon1, weapon2;
-	private JTextArea console;
+	private static JTextArea console;
 	private JScrollPane jsp;
 	
 	public VentanaPrincipal() {
@@ -97,6 +99,14 @@ public class VentanaPrincipal extends JFrame {
 		//end
 		//Botones de Fight y Clear Console
 		bFight=new JButton("Fight");
+		bFight.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				new Fight(warrior1,weapon1,warrior2,weapon2);
+			}
+			
+		});
 		fightPanel.add(bFight);
 		bClearConsole=new JButton("Clear Console");
 		bClearConsole.addActionListener(new ActionListener() {
@@ -140,8 +150,8 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		warrior1= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6);
-		warrior2= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6);
+		warrior1= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6,0);
+		warrior2= new Warrior(0,"No Selected","noselected.png","none",100,3,4,5,6,0);
 		System.out.println(warrior1.getWarriorName());
 		new VentanaPrincipal();
 	}
@@ -157,6 +167,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public static void setWarrior(Warrior warriorSelected) {
 		warrior1=warriorSelected;
+		w1maxHealth=warrior1.getHp();
 	}
 	public static void setWeapon(Weapon weaponSelected) {
 		weapon1=weaponSelected;
@@ -183,9 +194,10 @@ public class VentanaPrincipal extends JFrame {
 		bRanking.setEnabled(true);
 		
 	}
-	public static void updateWar1(int strength, int defense){
+	public static void updateWar1(int strength, int speed){
 		panel1.pbPower.setValue((warrior1.getAgility()+strength)*10);
-		panel1.pbDefense.setValue((warrior1.getDefense()+defense)*10);
+		panel1.pbSpeed.setValue((warrior1.getSpeed()+speed)*10);
+		//System.out.println("Arma:" + weapon1.getWeaponName()+"Velocidad:"+weapon1.getSpeed());
 		bChooseCh.setEnabled(true);
 		bChooseWe.setEnabled(true);
 		bRanking.setEnabled(true);
@@ -202,15 +214,55 @@ public class VentanaPrincipal extends JFrame {
 		Weapon[] weapons = SQLCore.Querys.allWeapons(warrior2.getRaceName());
 		System.out.println("Longitud de weapons " + weapons.length);
 		weapon2 = weapons[rand.nextInt(weapons.length)];
+		System.out.println("Arma:" + weapon2.getWeaponName()+"Velocidad:"+weapon2.getSpeed());
 		panel2.updateImage(warrior2.getImagePath());
 		panel2.pr.setValue(warrior2.getHp());
 		panel2.pbPower.setValue((warrior2.getStrenght()+weapon2.getStrenght())*10);
-		panel2.pbSpeed.setValue(warrior2.getSpeed()+weapon2.getSpeed()*10);
+		panel2.pbSpeed.setValue((warrior2.getSpeed()+weapon2.getSpeed())*10);
 		panel2.pbAgility.setValue(warrior2.getAgility()*10);
 		panel2.pbDefense.setValue(warrior2.getDefense()*10);
+		w2maxHealth=warrior2.getHp();
 		bChooseCh.setEnabled(true);
 		bChooseWe.setEnabled(true);
 		bRanking.setEnabled(true);
+		bFight.setEnabled(true);
+		bClearConsole.setEnabled(true);
+		
+	}
+	public static void setHpValueW1(int hp) {
+		panel1.pr.setValue(hp);
+		warrior1.setHp(hp);
+	}
+	public static void setHpValueW2(int hp) {
+		panel2.pr.setValue(hp);
+		warrior2.setHp(hp);
+	}
+	public static void endFight(int playerWins) {
+		bChooseCh.setEnabled(false);
+		bChooseWe.setEnabled(false);
+		bRanking.setEnabled(false);
+		bFight.setEnabled(false);
+		bClearConsole.setEnabled(false);
+		if(playerWins==1) {
+			new EndFightWindow(w1maxHealth, playerWins);
+		}
+		else {
+			new EndFightWindow(w2maxHealth, playerWins);
+		}
+		
+	}
+	public static void enableCW() {
+		bChooseCh.setEnabled(true);
+		bChooseWe.setEnabled(false);
+		bRanking.setEnabled(false);
+	}
+	public static void printConsole(String message) {
+		if (console.getText().equals("")) {
+			console.setText(message);
+		}
+		else {
+			console.setText(console.getText()+"\n"+message);
+		}
 		
 	}
 }

@@ -10,12 +10,13 @@ public class Warrior {
 	private int speed;
 	private int agility;
 	private int defense;
+	private int points;
 	
 	public Warrior() {
 		
 	}
 	
-	public Warrior(int id, String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
+	public Warrior(int id, String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense, int points) {
 		this.id=id;
 		this.warriorName=warriorName;
 		this.imagePath=imagePath;
@@ -25,6 +26,7 @@ public class Warrior {
 		this.speed=speed;
 		this.agility=agility;
 		this.defense=defense;
+		this.points=points;
 	}
 
 	public String getWarriorName() {
@@ -98,5 +100,14 @@ public class Warrior {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 
 }
