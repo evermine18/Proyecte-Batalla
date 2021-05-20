@@ -10,24 +10,27 @@ public class Fight {
 	public Fight(Warrior warrior1, Weapon weapon1, Warrior warrior2, Weapon weapon2) {
 		injuresP1=0;
 		injuresP2=0;
+		turn=0;
 		Random rand = new Random();
 		while(warrior1.getHp()>0 && warrior2.getHp()>0) {
-			if((warrior1.getSpeed()+weapon1.getSpeed())==(warrior2.getSpeed()+weapon2.getSpeed())) {
-				if(warrior1.getAgility()==warrior2.getAgility()) {
-					turn=rand.nextInt(2)+1;
+			if(turn==0) {
+				if((warrior1.getSpeed()+weapon1.getSpeed())==(warrior2.getSpeed()+weapon2.getSpeed())) {
+					if(warrior1.getAgility()==warrior2.getAgility()) {
+						turn=rand.nextInt(2)+1;
+					}
+					else if(warrior1.getAgility()>warrior2.getAgility()){
+						turn=1;
+					}
+					else {
+						turn=2;
+					}
 				}
-				else if(warrior1.getAgility()>warrior2.getAgility()){
+				else if((warrior1.getSpeed()+weapon1.getSpeed())>(warrior2.getSpeed()+weapon2.getSpeed())) {
 					turn=1;
 				}
 				else {
 					turn=2;
 				}
-			}
-			else if((warrior1.getSpeed()+weapon1.getSpeed())>(warrior2.getSpeed()+weapon2.getSpeed())) {
-				turn=1;
-			}
-			else {
-				turn=2;
 			}
 			//Printamos turno
 			VentanaPrincipal.printConsole("Info: Player "+turn+" turn");

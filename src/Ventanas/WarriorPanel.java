@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -44,7 +45,8 @@ class WarriorPanel extends JPanel{
 		}
 		pr=new JProgressBar(0,100);
 		pr.setBackground(Color.WHITE);
-		pr.setForeground(Color.GREEN);
+		pr.setBorder(BorderFactory.createLineBorder(new Color(60,174,163)));
+		pr.setForeground(new Color(44,128,120));
 		pr.setValue(hp);
 		pr.setStringPainted(true);
 		this.add(pr);
@@ -61,7 +63,8 @@ class WarriorPanel extends JPanel{
 		power=new JLabel("Power");
 		statsPanel.add(power);
 		pbPower=new JProgressBar(0,100);
-		pbPower.setForeground(Color.RED);
+		pbPower.setBorder(BorderFactory.createLineBorder(new Color(197,69,47)));
+		pbPower.setForeground(new Color(237,85,59));
 		pbPower.setValue(vPower);
 		pbPower.setStringPainted(true);
 		statsPanel.add(pbPower);
@@ -69,7 +72,8 @@ class WarriorPanel extends JPanel{
 		agility=new JLabel("Agility");
 		statsPanel.add(agility);
 		pbAgility=new JProgressBar(0,100);
-		pbAgility.setForeground(Color.PINK);
+		pbAgility.setBorder(BorderFactory.createLineBorder(new Color(211,182,77)));
+		pbAgility.setForeground(new Color(246,213,92));
 		pbAgility.setValue(vAgility);
 		pbAgility.setStringPainted(true);;
 		statsPanel.add(pbAgility);
@@ -77,7 +81,8 @@ class WarriorPanel extends JPanel{
 		speed=new JLabel("Speed");
 		statsPanel.add(speed);
 		pbSpeed=new JProgressBar(0,100);
-		pbSpeed.setForeground(Color.YELLOW);
+		pbSpeed.setBorder(BorderFactory.createLineBorder(new Color(23,70,110)));
+		pbSpeed.setForeground(new Color(32,99,155));
 		pbSpeed.setValue(vSpeed);
 		pbSpeed.setStringPainted(true);
 		statsPanel.add(pbSpeed);
@@ -85,7 +90,8 @@ class WarriorPanel extends JPanel{
 		defense=new JLabel("Defense");
 		statsPanel.add(defense);
 		pbDefense=new JProgressBar(0,100);
-		pbDefense.setForeground(Color.BLUE);
+		pbDefense.setBorder(BorderFactory.createLineBorder(new Color(10,26,39)));
+		pbDefense.setForeground(new Color(23,63,95));
 		pbDefense.setValue(vDefense);
 		pbDefense.setStringPainted(true);
 		statsPanel.add(pbDefense);

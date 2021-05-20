@@ -1,5 +1,6 @@
 package Ventanas;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +27,7 @@ public class ChooseWeapWindow extends JFrame{
 	private ImageIcon imagen;
 	private Image dimg;
 	private int unaid;
-	private JButton[] bWarriors;
+	private JButton[] bWeapons;
 	private Weapon[] weaponList;
 	private Weapon weaponSelected;
 	
@@ -37,9 +39,6 @@ public class ChooseWeapWindow extends JFrame{
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
 		
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//w=-1;
-		//i=-1;
 		loadWeapons(weaponList);
 		this.setVisible(true);
 	}
@@ -47,16 +46,17 @@ public class ChooseWeapWindow extends JFrame{
 	public void loadWeapons(Weapon[] weapon) {
 		panel1=new JPanel();
 		System.out.println("entroo");
-		bWarriors = new JButton[weaponList.length];
+		bWeapons = new JButton[weaponList.length];
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Weapon weapons: weaponList) {
 			if(ReadPicture("./img/"+weapons.getImagePath())==true) {
 				final int id = weapons.getId()-1;
 				imagen = new ImageIcon(dimg);
-				bWarriors[id] = new JButton(imagen);
-				bWarriors[id].addActionListener(new ActionListener() {
+				bWeapons[id] = new JButton(imagen);
+				bWeapons[id].setBackground(Color.WHITE);
+				bWeapons[id].setBorder(BorderFactory.createLineBorder(new Color(15,37,87)));
+						bWeapons[id].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					//	VentanaPrincipal.setWarrior1(warriorList[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
 						System.out.println(id);
 						selectWarrior(id);
 						VentanaPrincipal.setWeapon(weaponList[id]);
@@ -66,9 +66,9 @@ public class ChooseWeapWindow extends JFrame{
 				});
 			}
 			else {
-				//bWarriors[weapon.getId()-1] = new JButton(weapon[weapon.getId()-1].getWeaponName());
+				bWeapons[weapons.getId()-1] = new JButton(weapon[weapons.getId()-1].getWeaponName());
 			}
-			panel1.add(bWarriors[weapons.getId()-1]);
+			panel1.add(bWeapons[weapons.getId()-1]);
 		}
 		
 		this.add(panel1);

@@ -45,12 +45,23 @@ public class VentanaPrincipal extends JFrame {
 	
 	public VentanaPrincipal() {
 		//TopPanel 
+		if(SQLCore.SQLCore.Connection()==null) {
+			System.out.println("ERROR: The connection to the database could not be created ");
+			JOptionPane.showOptionDialog(rootPane, "Could not connect to the database!!!","DB ERROR", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+			System.exit(0);
+		}
 		topPanel=new JPanel();
 		fightPanel=new JPanel();
 		consolePanel= new JPanel();
 		bChooseCh=new JButton("Choose Character");
+		bChooseCh.setBackground(new Color(5,151,242));
+		bChooseCh.setForeground(Color.WHITE);
 		bChooseWe=new JButton("Choose Weapon");
+		bChooseWe.setForeground(Color.WHITE);
+		bChooseWe.setBackground(new Color(5,151,242));
 		bRanking=new JButton("Ranking");
+		bRanking.setForeground(Color.WHITE);
+		bRanking.setBackground(new Color(5,151,242));
 		bChooseCh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bChooseCh.setEnabled(false);
@@ -100,6 +111,8 @@ public class VentanaPrincipal extends JFrame {
 		//end
 		//Botones de Fight y Clear Console
 		bFight=new JButton("Fight");
+		bFight.setForeground(Color.WHITE);
+		bFight.setBackground(new Color(3,140,62));
 		bFight.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -113,6 +126,8 @@ public class VentanaPrincipal extends JFrame {
 		});
 		fightPanel.add(bFight);
 		bClearConsole=new JButton("Clear Console");
+		bClearConsole.setForeground(Color.WHITE);
+		bClearConsole.setBackground(new Color(242,53,53));
 		bClearConsole.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

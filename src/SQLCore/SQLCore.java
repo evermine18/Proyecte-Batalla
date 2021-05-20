@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SQLCore {
-	private static String urlDatos = "jdbc:mysql://192.168.1.82/proyecto2?serverTimezone=UTC";
+	private static String urlDatos = "jdbc:mysql://localhost/proyecto?serverTimezone=UTC";
 	private static String usuario = "root";
 	private static String pass = "Persiana1234";
 	public static Connection Connection() {

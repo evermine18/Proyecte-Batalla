@@ -1,5 +1,6 @@
 package Ventanas;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import SQLCore.Querys;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +33,6 @@ public class ChooseCharWindow extends JFrame {
 	private JButton[] bWarriors;
 	private Warrior[] warriorList;
 	private Warrior warriorSelected;
-	//private ImageIcon[] iIcon=new ImageIcon[Querys.rowCount()];
 	
 	public ChooseCharWindow(){
 		Querys q = new Querys();
@@ -40,9 +41,6 @@ public class ChooseCharWindow extends JFrame {
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
-		//this.setUndecorated(true);
-		//w=-1;
-		//i=-1;
 		loadWarriors(warriorList);
 		this.setVisible(true);
 	}
@@ -51,37 +49,17 @@ public class ChooseCharWindow extends JFrame {
 		panel1=new JPanel();
 		
 		bWarriors = new JButton[warriorList.length];
-		/*
-		for(i=0;i<warriors.length;i++) {
-			if(ReadPicture("./img/"+warriors[i].getImagePath())==true) {
-				imagen = new ImageIcon(dimg);
-				bWarriors[i] = new JButton(imagen);
-				bWarriors[i].addActionListener(new ActionListener() {
-
-					public void actionPerformed(ActionEvent e) {
-					//	VentanaPrincipal.setWarrior1(warriorList[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
-						System.out.println(i);
-						selectWarrior(i);
-						System.out.println(warriorSelected);
-					}
-					
-				});
-			}
-			else {
-				bWarriors[i] = new JButton(warriors[i].getWarriorName());
-			}
-			panel1.add(bWarriors[i]);
-		}
-		*/
+		
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Warrior warrior: warriorList) {
 			if(ReadPicture("./img/"+warrior.getImagePath())==true) {
 				final int id = warrior.getId()-1;
 				imagen = new ImageIcon(dimg);
 				bWarriors[id] = new JButton(imagen);
+				bWarriors[id].setBackground(Color.WHITE);
+				bWarriors[id].setBorder(BorderFactory.createLineBorder(new Color(15,37,87)));
 				bWarriors[id].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					//	VentanaPrincipal.setWarrior1(warriorList[i].getWarriorName(),warriors[i].getImagePath(),warriors[i].getRaceName(),warriors[i].getHp(),warriors[i].getStrenght(),warriors[i].getSpeed(),warriors[i].getAgility(),warriors[i].getDefense());
 						System.out.println(id);
 						selectWarrior(id);
 						VentanaPrincipal.setWarrior(warriorList[id]);
@@ -93,6 +71,7 @@ public class ChooseCharWindow extends JFrame {
 			else {
 				bWarriors[warrior.getId()-1] = new JButton(warriors[warrior.getId()-1].getWarriorName());
 			}
+			
 			panel1.add(bWarriors[warrior.getId()-1]);
 		}
 		
