@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
 	private static JButton bChooseCh, bChooseWe, bRanking, bFight, bClearConsole;
 	private static int w1maxHealth;
 	private static int w2maxHealth;
-	private JPanel content,topPanel, fightPanel;
+	private JPanel topPanel, fightPanel;
 	private static WarriorPanel panel1;
 	private static WarriorPanel panel2;
 	private static Warrior warrior1,warrior2;

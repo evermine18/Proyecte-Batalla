@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import SQLCore.Querys;
 
 class WarriorPanel extends JPanel{
 	private JLabel label, power, agility, speed, defense;

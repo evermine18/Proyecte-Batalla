@@ -17,11 +17,9 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import GameCore.Warrior;
-import Ventanas.MainWindow;
 
 public class ChooseCharWindow extends JFrame {
 	
@@ -29,7 +27,6 @@ public class ChooseCharWindow extends JFrame {
 	private BufferedImage img = null;
 	private ImageIcon imagen;
 	private Image dimg;
-	private int unaid;
 	private JButton[] bWarriors;
 	private Warrior[] warriorList;
 	private Warrior warriorSelected;

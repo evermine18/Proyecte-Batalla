@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import GameCore.Warrior;
 import GameCore.Weapon;
 import SQLCore.Querys;
 
