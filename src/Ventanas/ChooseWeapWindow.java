@@ -41,6 +41,7 @@ public class ChooseWeapWindow extends JFrame{
 		//w=-1;
 		//i=-1;
 		loadWeapons(weaponList);
+		this.setUndecorated(true);
 		this.setVisible(true);
 	}
 	

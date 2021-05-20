@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
@@ -25,20 +27,19 @@ import SQLCore.Querys;
 
 
 public class VentanaPrincipal extends JFrame {
-	private static JButton bChooseCh;
-	private static JButton bChooseWe;
-	private static JButton bRanking;
+	private static JButton bChooseCh, bChooseWe, bRanking, bFight, bClearConsole;
 	private int w;
-	private JPanel content,topPanel;
+	private JPanel content,topPanel, fightPanel;
 	private static WarriorPanel panel1;
-	private WarriorPanel panel2;
+	private static WarriorPanel panel2;
 	private static Warrior warrior1,warrior2;
 	private Warrior[] warriorList;
-	private static Weapon weapon1;
+	private static Weapon weapon1, weapon2;
 	
 	public VentanaPrincipal() {
 		//TopPanel 
 		topPanel=new JPanel();
+		fightPanel=new JPanel();
 		bChooseCh=new JButton("Choose Character");
 		bChooseWe=new JButton("Choose Weapon");
 		bRanking=new JButton("Ranking");
@@ -57,12 +58,23 @@ public class VentanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				System.out.println(warrior1);
+				bChooseCh.setEnabled(false);
+				bChooseWe.setEnabled(false);
+				bRanking.setEnabled(false);
 				new ChooseWeapWindow(warrior1.getRaceName());
 			}
 			
 		});
 		bChooseWe.setEnabled(false);
 		topPanel.add(bChooseWe);
+		bRanking.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				updateWar2();
+			}
+			
+		});
 		topPanel.add(bRanking);
 		this.add(topPanel,BorderLayout.CENTER);
 		warriorList=new Warrior[Querys.rowCount("warriors")];
@@ -77,9 +89,9 @@ public class VentanaPrincipal extends JFrame {
 		//panel1.add(boton);
 		//personaje
 		//end
-		initWarriors();
+		//Botones de Fight y Clear Console
 		
-		panel1.pbPower.setValue(10);
+		
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
 		this.add(panel2,BorderLayout.LINE_END);
@@ -98,6 +110,9 @@ public class VentanaPrincipal extends JFrame {
 	public void  initWarriors() {
 		Querys q=new Querys();
 		warriorList=q.allWarriors();
+	}
+	public static void noSelected() {
+		bChooseCh.setEnabled(true);
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -144,11 +159,34 @@ public class VentanaPrincipal extends JFrame {
 		bRanking.setEnabled(true);
 		
 	}
-	public static void updateWar1(int agility, int defense){
-		panel1.pbAgility.setValue((warrior1.getAgility()+agility)*10);
+	public static void updateWar1(int strength, int defense){
+		panel1.pbPower.setValue((warrior1.getAgility()+strength)*10);
 		panel1.pbDefense.setValue((warrior1.getDefense()+defense)*10);
 		bChooseCh.setEnabled(true);
 		bChooseWe.setEnabled(true);
 		bRanking.setEnabled(true);
+	}
+	//Generacion del bot
+	public static void updateWar2(){
+		Random rand = new Random();
+		Warrior[] warriors = SQLCore.Querys.allWarriors();
+		System.out.println("Longitud de warriors " + warriors.length);
+		warrior2= warriors[rand.nextInt(warriors.length)];
+		for (int i = 0; i<20; i++) {
+			System.out.println(rand.nextInt(warriors.length));
+		}
+		Weapon[] weapons = SQLCore.Querys.allWeapons(warrior2.getRaceName());
+		System.out.println("Longitud de weapons " + weapons.length);
+		weapon2 = weapons[rand.nextInt(weapons.length)];
+		panel2.updateImage(warrior2.getImagePath());
+		panel2.pr.setValue(warrior2.getHp());
+		panel2.pbPower.setValue((warrior2.getStrenght()+weapon2.getStrenght())*10);
+		panel2.pbSpeed.setValue(warrior2.getSpeed()+weapon2.getSpeed()*10);
+		panel2.pbAgility.setValue(warrior2.getAgility()*10);
+		panel2.pbDefense.setValue(warrior2.getDefense()*10);
+		bChooseCh.setEnabled(true);
+		bChooseWe.setEnabled(true);
+		bRanking.setEnabled(true);
+		
 	}
 }

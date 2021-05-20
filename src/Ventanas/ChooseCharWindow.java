@@ -40,8 +40,7 @@ public class ChooseCharWindow extends JFrame {
 		this.setTitle("Projecte Batalla");
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
-		
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setUndecorated(true);
 		//w=-1;
 		//i=-1;
 		loadWarriors(warriorList);
