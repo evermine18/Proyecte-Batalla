@@ -3,9 +3,11 @@ package Ventanas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +22,7 @@ import javax.swing.JPanel;
 import GameCore.Weapon;
 import SQLCore.Querys;
 
-public class ChooseWeapWindow extends JFrame{
+public class ChooseWeapWindow extends JFrame implements WindowListener{
 	private JPanel panel1;
 	private BufferedImage img = null;
 	private ImageIcon imagen;
@@ -33,7 +35,9 @@ public class ChooseWeapWindow extends JFrame{
 		Querys q = new Querys();
 		weaponList=q.allWeapons(raceName);
 		//System.out.println(weaponList[1].getId());
+		this.setLocationRelativeTo(null);
 		this.setTitle("Projecte Batalla");
+		this.addWindowListener(this);
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
 		
@@ -43,12 +47,13 @@ public class ChooseWeapWindow extends JFrame{
 	
 	public void loadWeapons(Weapon[] weapon) {
 		panel1=new JPanel();
+		panel1.setBackground(new Color(80,227,194));
 		System.out.println("entroo");
 		bWeapons = new JButton[weaponList.length];
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Weapon weapons: weaponList) {
 			final int id = weapons.getId()-1;
-			if(ReadPicture("./img/"+weaponList[id].getImagePath())==true) {
+			if(ReadPicture("."+File.separator+"img"+File.separator+weaponList[id].getImagePath())==true) {
 				imagen = new ImageIcon(dimg);
 				bWeapons[id] = new JButton(imagen);
 				bWeapons[id].setBackground(Color.WHITE);
@@ -93,5 +98,47 @@ public class ChooseWeapWindow extends JFrame{
 		dimg = img.getScaledInstance(195,258,
 		        Image.SCALE_SMOOTH);
 		return true;
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		MainWindow.enableCWe();
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

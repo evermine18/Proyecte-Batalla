@@ -2,13 +2,18 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import GameCore.Fight;
 import GameCore.Warrior;
@@ -50,6 +56,8 @@ public class MainWindow extends JFrame {
 		bChooseCh=new JButton("Choose Character");
 		bChooseCh.setBackground(new Color(5,151,242));
 		bChooseCh.setForeground(Color.WHITE);
+		bChooseCh.setFont(new Font("Helvetica", Font.BOLD, 15));
+		bChooseCh.setBorderPainted(false);
 		bChooseCh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bChooseCh.setEnabled(false);
@@ -64,6 +72,8 @@ public class MainWindow extends JFrame {
 		bChooseWe=new JButton("Choose Weapon");
 		bChooseWe.setForeground(Color.WHITE);
 		bChooseWe.setBackground(new Color(5,151,242));
+		bChooseWe.setFont(new Font("Helvetica", Font.BOLD, 15));
+		bChooseWe.setBorderPainted(false);
 		bChooseWe.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -80,6 +90,8 @@ public class MainWindow extends JFrame {
 		bRanking=new JButton("Ranking");
 		bRanking.setForeground(Color.WHITE);
 		bRanking.setBackground(new Color(5,151,242));
+		bRanking.setFont(new Font("Helvetica", Font.BOLD, 15));
+		bRanking.setBorderPainted(false);
 		bRanking.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -94,17 +106,19 @@ public class MainWindow extends JFrame {
 		warriorList=new Warrior[Querys.rowCount("warriors")];
 		warriorList=Querys.allWarriors();
 		panel1=new WarriorPanel("./img/"+ warrior1.getImagePath(),warrior1.getHp(),warrior1.getStrenght(),warrior1.getAgility(),warrior1.getSpeed(),warrior1.getDefense());
-		panel1.setPreferredSize(new Dimension(350,460));
+		panel1.setPreferredSize(new Dimension(350,470));
 		panel1.setBackground(new Color(132,235,212));
 		panel2=new WarriorPanel("./img/"+ warrior2.getImagePath(),warrior2.getHp(),warrior2.getStrenght(),warrior2.getAgility(),warrior2.getSpeed(),warrior2.getDefense());
-		panel2.setPreferredSize(new Dimension(350,460));
+		panel2.setPreferredSize(new Dimension(350,470));
 		panel2.setBackground(new Color(132,235,212));
 		
 		//Panel Fight and Console
 		fightPanel=new JPanel();
 		bFight=new JButton("Fight");
-		bFight.setForeground(Color.WHITE);
-		bFight.setBackground(new Color(3,140,62));
+		bFight.setForeground(new Color(58,124,207));
+		bFight.setBackground(new Color(254,253,151));
+		bFight.setFont(new Font("Helvetica", Font.BOLD, 15));
+		bFight.setBorderPainted(false);
 		bFight.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -118,8 +132,11 @@ public class MainWindow extends JFrame {
 		fightPanel.add(bFight);
 		fightPanel.setBackground(new Color(80,227,194));
 		bClearConsole=new JButton("Clear Console");
-		bClearConsole.setForeground(Color.WHITE);
-		bClearConsole.setBackground(new Color(242,53,53));
+		//bClearConsole.setBorder(new RoundedBorder(10));
+		bClearConsole.setForeground(new Color(58,124,207));
+		bClearConsole.setBackground(new Color(241,151,192));
+		bClearConsole.setFont(new Font("Helvetica", Font.BOLD, 15));
+		bClearConsole.setBorderPainted(false);
 		bClearConsole.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -131,19 +148,21 @@ public class MainWindow extends JFrame {
 		bFight.setEnabled(false);
 		console=new JTextArea("",8,60);
 		console.setEditable(false);
+		console.setFont(new Font("Helvetica", Font.BOLD, 12));
 		jsp=new JScrollPane(console);
 		fightPanel.add(jsp);
 		fightPanel.setPreferredSize(new Dimension(100,200));
 		
 		// JFRAME Config
+		this.setLocationRelativeTo(null);
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
 		this.add(panel2,BorderLayout.LINE_END);
 		this.add(fightPanel,BorderLayout.PAGE_END);
 		this.getContentPane().setBackground(new Color(80,227,194));
 		this.setTitle("Projecte Batalla");
-		this.setSize(770,700);
-		this.setMinimumSize(new Dimension(770, 700));
+		this.setSize(770,720);
+		this.setMinimumSize(new Dimension(770, 720));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
@@ -261,7 +280,12 @@ public class MainWindow extends JFrame {
 	public static void enableCW() {
 		bChooseCh.setEnabled(true);
 		bChooseWe.setEnabled(false);
-		bRanking.setEnabled(false);
+		bRanking.setEnabled(true);
+	}
+	public static void enableCWe() {
+		bChooseCh.setEnabled(true);
+		bChooseWe.setEnabled(true);
+		bRanking.setEnabled(true);
 	}
 	//Metodo para printar por consola un mensaje
 	public static void printConsole(String message) {

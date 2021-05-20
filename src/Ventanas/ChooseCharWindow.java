@@ -3,6 +3,7 @@ package Ventanas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -31,12 +32,16 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 	private JButton[] bWarriors;
 	private Warrior[] warriorList;
 	private Warrior warriorSelected;
+	private boolean isSelected;
 	
 	public ChooseCharWindow(){
+		isSelected=false;
 		Querys q = new Querys();
 		warriorList=q.allWarriors();
 		System.out.println(warriorList[1].getId());
+		this.setLocationRelativeTo(null);
 		this.setTitle("Projecte Batalla");
+		this.addWindowListener(this);
 		this.setSize(770,600);
 		this.setMinimumSize(new Dimension(770, 600));
 		loadWarriors();
@@ -45,13 +50,13 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 	
 	public void loadWarriors() {
 		panel1=new JPanel();
-		
+		panel1.setBackground(new Color(80,227,194));
 		bWarriors = new JButton[warriorList.length];
 		
 		//For Each que me va a salvar la vida y me la ha salvado
 		for (Warrior warrior: warriorList) {
 			final int id = warrior.getId()-1;
-			if(ReadPicture("./img/"+warriorList[id].getImagePath())==true) {
+			if(ReadPicture("."+File.separator+"img"+File.separator+warriorList[id].getImagePath())==true) {
 				System.out.println("ImagePath "+warriorList[id].getImagePath());
 				imagen = new ImageIcon(dimg);
 				bWarriors[id] = new JButton(imagen);
@@ -60,10 +65,10 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 				bWarriors[id].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						System.out.println(id);
+						isSelected=true;
 						selectWarrior(id);
 						MainWindow.setWarrior(warriorList[id]);
 						System.out.println(warriorSelected);
-						
 					}
 					
 				});
@@ -108,23 +113,28 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 	}
 
 	public void windowClosing(WindowEvent e) {
-		
+		if (isSelected==true) {
+			MainWindow.enableCWe();
+		}
+		else {
+			MainWindow.enableCW();
+		}
 		
 	}
 
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void windowIconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void windowDeiconified(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void windowActivated(WindowEvent e) {
@@ -134,6 +144,6 @@ public class ChooseCharWindow extends JFrame implements WindowListener {
 
 	public void windowDeactivated(WindowEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
