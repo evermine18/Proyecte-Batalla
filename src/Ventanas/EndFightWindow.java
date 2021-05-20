@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,6 +34,7 @@ public class EndFightWindow extends JFrame{
 					VentanaPrincipal.setHpValueW2(hp);
 					VentanaPrincipal.enableCW();
 				}
+				CloseWindow();
 				
 				
 				
@@ -40,6 +42,14 @@ public class EndFightWindow extends JFrame{
 			
 		});
 		bNo=new JButton("No");
+		bNo.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+			
+		});
 		panel1.add(label1);
 		buttons.add(bYes);
 		buttons.add(bNo);
@@ -49,6 +59,9 @@ public class EndFightWindow extends JFrame{
 		this.setSize(200,150);
 		this.setMinimumSize(new Dimension(200, 150));
 		this.setVisible(true);
+	}
+	public void CloseWindow() {
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 
 }

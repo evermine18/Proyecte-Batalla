@@ -79,7 +79,7 @@ public class VentanaPrincipal extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				updateWar2();
+				//updateWar2();
 			}
 			
 		});
@@ -103,6 +103,9 @@ public class VentanaPrincipal extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				if(warrior2.getRaceName().equals("none")) {
+					updateWar2();
+				}
 				new Fight(warrior1,weapon1,warrior2,weapon2);
 			}
 			
@@ -118,7 +121,7 @@ public class VentanaPrincipal extends JFrame {
 			
 		});
 		fightPanel.add(bClearConsole);
-		
+		bFight.setEnabled(false);
 		console=new JTextArea("",8,60);
 		jsp=new JScrollPane(console);
 		fightPanel.add(jsp);
@@ -171,6 +174,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	public static void setWeapon(Weapon weaponSelected) {
 		weapon1=weaponSelected;
+		bFight.setEnabled(true);
 	}
 	public void setWarrior2(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		warrior2.setWarriorName(warriorName);
