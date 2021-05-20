@@ -10,6 +10,7 @@ import GameCore.Elf;
 import GameCore.Humano;
 import GameCore.Nan;
 import GameCore.Warrior;
+import GameCore.Weapon;
 
 
 public class Querys {
@@ -25,19 +26,19 @@ public class Querys {
 		
 	}
 	public static Warrior[] allWarriors(){
-		Warrior[] warriors = new Warrior[rowCount()];
+		Warrior[] warriors = new Warrior[rowCount("warriors")];
 		int contador=0;
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
 			ResultSet rs = stmnt.executeQuery("SELECT warrior_id, warrior_name, warrior_image_path, race.race_id, race.race_name, race.hp, race.strength, race.speed, race.agility, race.defense FROM warriors JOIN race ON warriors.race_id=race.race_id;");
 			while (rs.next()) {
-				if(rs.getString(5).equals("Humano")) {
+				if(rs.getString(5).equals("human")) {
 					warriors[contador]=new Humano(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
-				else if(rs.getString(5).contains("Nan")) {
+				else if(rs.getString(5).contains("nan")) {
 					warriors[contador]=new Nan(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
-				else if(rs.getString(5).equals("Elf")) {
+				else if(rs.getString(5).equals("elf")) {
 					warriors[contador]=new Elf(rs.getInt(1),rs.getString(2),rs.getString(3));
 				}
 				//warriors[contador]=new Warrior(rs.getString(2),rs.getString(3),rs.getString(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9), rs.getInt(10));
@@ -62,11 +63,47 @@ public class Querys {
 		}
 		return warriors;
 	}
-	public static int rowCount() {
+	public static Weapon[] allWeapons(String raceName){
+		Weapon[] weapons = new Weapon[rowCount("weapons", raceName)];
+		int contador=0;
+		try {
+			System.out.println(raceName);
+			Statement stmnt = SQLCore.Connection().createStatement();
+			ResultSet rs = stmnt.executeQuery("SELECT weapon_id, weapon_name, weapon_image_path, strength, speed, weapon_race FROM weapons WHERE weapon_race LIKE '%"+raceName+"%';");
+			while (rs.next()) {
+					System.out.println(rs.getInt(1)+" Me voy a ejecutar pero de muerto "+ contador);
+					weapons[contador]=new Weapon(contador+1,rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5));
+				contador++;
+			}
+			
+		}
+		catch(SQLException e) {
+			System.out.println("MYSQL: No se ha podido ejecutar la consulta");
+			return null;
+		}
+		//System.out.println(weapons[4].getWeaponName()+ "MorenoMaricon");
+		return weapons;
+	}
+	public static int rowCount(String table) {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
-			ResultSet rs = stmnt.executeQuery("SELECT COUNT(warrior_id) FROM warriors;");
+			ResultSet rs = stmnt.executeQuery("SELECT COUNT(warrior_id) FROM "+table+";");
 			while(rs.next()) {
+				return rs.getInt(1);
+		}
+		}
+		catch(SQLException e) {
+			System.out.println("MYSQL: No se ha podido ejecutar la consulta");
+			return 0;
+		}
+		return 0;
+	}
+	public static int rowCount(String table, String raceName) {
+		try {
+			Statement stmnt = SQLCore.Connection().createStatement();
+			ResultSet rs = stmnt.executeQuery("SELECT COUNT(weapon_id) FROM "+table+" WHERE weapon_race LIKE '%"+raceName+"%';");
+			while(rs.next()) {
+				System.out.println("EEEEEEE "+rs.getInt(1));
 				return rs.getInt(1);
 		}
 		}

@@ -5,6 +5,6 @@ public class Nan extends Warrior{
 		super(0,"","","",0,0,0,0,0);
 	}
 	public Nan(int id, String warriorName, String imagePath) {
-		super(id,warriorName,imagePath,"Nan",60,6,3,5,4);
+		super(id,warriorName,imagePath,"nan",60,6,3,5,4);
 	}
 }

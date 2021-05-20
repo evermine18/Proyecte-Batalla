@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -90,6 +91,25 @@ class WarriorPanel extends JPanel{
 		statsPanel.add(pbDefense);
 		this.add(statsPanel);
 		
+		
+	}
+	
+	public void updateImage(String imagePath) {
+		System.out.println("./img/"+imagePath);
+		try {
+		    img = ImageIO.read(new File("./img/"+imagePath));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		    System.out.println("Debug: ERROR AL CARGAR LA IMAGEN");
+		}
+		dimg = img.getScaledInstance(195,258,
+		        Image.SCALE_SMOOTH);
+		imagen=imagen = new ImageIcon(dimg);
+		label.setIcon(imagen);
+		this.revalidate();
+		this.repaint();
+		//JLabel tempimg = new JLabel(new ImageIcon(dimg));
+		//lImg= tempimg;
 		
 	}
 	

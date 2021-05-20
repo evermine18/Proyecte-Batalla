@@ -5,7 +5,7 @@ public class Humano extends Warrior{
 		super(0,"","","",0,0,0,0,0);
 	}
 	public Humano(int id, String warriorName, String imagePath) {
-		super(id,warriorName,imagePath,"Humano",50,5,5,6,3);
+		super(id,warriorName,imagePath,"human",50,5,5,6,3);
 	}
 
 }

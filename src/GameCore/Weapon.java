@@ -1,17 +1,17 @@
 package GameCore;
 
-public class Weapons {
+public class Weapon {
 	private int id;
 	private String weaponName;
 	private String imagePath;
 	private int strenght;
 	private int speed;
 	
-	public Weapons() {
+	public Weapon() {
 		
 	}
 	
-	public Weapons(int id, String weaponName, String imagePath, int strenght, int speed) {
+	public Weapon(int id, String weaponName, String imagePath, int strenght, int speed) {
 		this.id = id;
 		this.weaponName = weaponName;
 		this.imagePath = imagePath;

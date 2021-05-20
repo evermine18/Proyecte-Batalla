@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class ChooseCharWindow extends JFrame {
 	private ImageIcon imagen;
 	private Image dimg;
 	private int unaid;
-	JButton[] bWarriors;
+	private JButton[] bWarriors;
 	private Warrior[] warriorList;
 	private Warrior warriorSelected;
 	//private ImageIcon[] iIcon=new ImageIcon[Querys.rowCount()];
@@ -105,6 +106,8 @@ public class ChooseCharWindow extends JFrame {
 	
 	public void selectWarrior(int numWar) {
 		warriorSelected=warriorList[numWar];
+		VentanaPrincipal.updateWar1(warriorList[numWar].getImagePath(),warriorList[numWar].getHp(),warriorList[numWar].getStrenght(),warriorList[numWar].getSpeed(),warriorList[numWar].getAgility(),warriorList[numWar].getDefense());
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public boolean ReadPicture(String ImageURL) {
