@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import javax.swing.JPanel;
 
 import GameCore.Warrior;
 
-public class ChooseCharWindow extends JFrame {
+public class ChooseCharWindow extends JFrame implements WindowListener {
 	
 	private JPanel panel1;
 	private BufferedImage img = null;
@@ -96,5 +97,40 @@ public class ChooseCharWindow extends JFrame {
 		dimg = img.getScaledInstance(195,258,
 		        Image.SCALE_SMOOTH);
 		return true;
+	}
+
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowClosing(WindowEvent e) {
+		
+		
+	}
+
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
