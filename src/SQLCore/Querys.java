@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.JOptionPane;
-
 import GameCore.Elf;
 import GameCore.Humano;
 import GameCore.Nan;
@@ -15,6 +13,7 @@ import GameCore.Weapon;
 
 
 public class Querys {
+	//Metodo principal de ejecutar consulta
 	public ResultSet ejecutarConsulta(String query) {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
@@ -26,6 +25,8 @@ public class Querys {
 		}
 		
 	}
+	
+	//Devuelve un array de warriors extraida de la base de datos
 	public static Warrior[] allWarriors(){
 		Warrior[] warriors = new Warrior[rowCount("warriors")];
 		int contador=0;
@@ -52,6 +53,7 @@ public class Querys {
 		}
 		return warriors;
 	}
+	//Devuelve un array de weapons que saca directamente de la Base de Datos
 	public static Weapon[] allWeapons(String raceName){
 		Weapon[] weapons = new Weapon[rowCount("weapons", raceName)];
 		int contador=0;
@@ -71,6 +73,7 @@ public class Querys {
 		}
 		return weapons;
 	}
+	//Metodo que devuelve el numero de filas de la tabla la cual le proporcionas
 	public static int rowCount(String table) {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
@@ -85,6 +88,7 @@ public class Querys {
 		}
 		return 0;
 	}
+	//Metodo que devuelve el numero de filas de la tabla la cual le proporcionas
 	public static int rowCount(String table, String raceName) {
 		try {
 			Statement stmnt = SQLCore.Connection().createStatement();
@@ -99,6 +103,7 @@ public class Querys {
 		}
 		return 0;
 	}
+	//Inserta el resultado de la batalla en la BD
 public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,int opponent_weapon_id, int injures_caused, int injures_suffered, int battle_points) {
 		
 		try {
@@ -118,6 +123,7 @@ public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,i
 			e.printStackTrace();
 		}
 	}
+	//Devuelve los 10 primeros top Jugadores
 	public static String[][] getRanking(){
 		String[][] topPlayers = new String[10][9];
 		int contador=0;

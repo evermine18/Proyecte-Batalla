@@ -3,24 +3,15 @@ package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -149,20 +140,10 @@ public class MainWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-	public void  initWarriors() {
-		Querys q=new Querys();
-		warriorList=q.allWarriors();
-	}
 	public static void noSelected() {
 		bChooseCh.setEnabled(true);
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		warrior1= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
-		warrior2= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
-		System.out.println(warrior1.getWarriorName());
-		new MainWindow();
-	}
+	//Set Warriors Player 1 por atributos
 	public static void setWarrior1(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		warrior1.setWarriorName(warriorName);
 		warrior1.setImagePath(imagePath);
@@ -173,14 +154,17 @@ public class MainWindow extends JFrame {
 		warrior1.setAgility(agility);
 		warrior1.setDefense(defense);
 	}
+	//Set Warriors Player 1 pasandole el objeto
 	public static void setWarrior(Warrior warriorSelected) {
 		warrior1=warriorSelected;
 		w1maxHealth=warrior1.getHp();
 	}
+	//Set Warriors Player 1 pasandole el objeto
 	public static void setWeapon(Weapon weaponSelected) {
 		weapon1=weaponSelected;
 		bFight.setEnabled(true);
 	}
+	//Set Warriors Player 2 por atributos
 	public void setWarrior2(String warriorName, String imagePath, String raceName, int hp, int strenght, int speed, int agility, int defense) {
 		warrior2.setWarriorName(warriorName);
 		warrior2.setImagePath(imagePath);
@@ -191,6 +175,7 @@ public class MainWindow extends JFrame {
 		warrior2.setAgility(agility);
 		warrior2.setDefense(defense);
 	}
+	//Actualiza los stats del panel de el Player 1
 	public static void updateWar1(String ImageURL, int hp, int power, int speed, int agility, int defense){
 		panel1.updateImage(ImageURL);
 		panel1.pr.setValue(hp);
@@ -238,6 +223,7 @@ public class MainWindow extends JFrame {
 		bClearConsole.setEnabled(true);
 		
 	}
+	//Metodos que setean la vida del Warrior1 y 2 y lo actualiza en el Panel
 	public static void setHpValueW1(int hp) {
 		panel1.pr.setValue(hp);
 		warrior1.setHp(hp);
@@ -246,6 +232,7 @@ public class MainWindow extends JFrame {
 		panel2.pr.setValue(hp);
 		warrior2.setHp(hp);
 	}
+	//Llamada a la funcion cuando se acaba la Lucha
 	public static void endFight(int playerWins) {
 		bChooseCh.setEnabled(false);
 		bChooseWe.setEnabled(false);
@@ -260,13 +247,15 @@ public class MainWindow extends JFrame {
 		}
 		
 	}
+	//Activa los botones para elegir Personaje otra vez
 	public static void enableCW() {
 		bChooseCh.setEnabled(true);
 		bChooseWe.setEnabled(false);
 		bRanking.setEnabled(false);
 	}
+	//Metodo para printar por consola un mensaje
 	public static void printConsole(String message) {
-		if (console.getText().equals("")) {
+		if (console.getText().equals("")) { //Si no hay nada escribe en la 1a linea
 			console.setText(message);
 		}
 		else {
@@ -274,4 +263,12 @@ public class MainWindow extends JFrame {
 		}
 		
 	}
+	//Llamada principal
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			warrior1= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
+			warrior2= new Warrior(0,"No Selected","noselected.png","none",0,0,0,0,0,0);
+			System.out.println(warrior1.getWarriorName());
+			new MainWindow();
+		}
 }
