@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -27,6 +26,7 @@ public class EndFightWindow extends JFrame implements WindowListener{
 		this.pWins=pWins;
 		this.hp=hp;
 		label1=new JLabel("Do you want to keep fighting?");
+		//Boton en el caso que si con su ActionListener
 		buttons=new JPanel();
 		buttons.setBackground(new Color(80,227,194));
 		bYes=new JButton("Yes");
@@ -54,6 +54,7 @@ public class EndFightWindow extends JFrame implements WindowListener{
 			}
 			
 		});
+		//Boton en el caso que no con su ActionListener
 		bNo=new JButton("No");
 		bNo.setForeground(new Color(58,124,207));
 		bNo.setBackground(new Color(241,151,192));
@@ -67,6 +68,8 @@ public class EndFightWindow extends JFrame implements WindowListener{
 			}
 			
 		});
+		
+		//JFrame Config
 		panel1.add(label1);
 		buttons.add(bYes);
 		buttons.add(bNo);

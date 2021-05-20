@@ -2,26 +2,23 @@ package Ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Toolkit;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
+
 import java.util.Random;
 
-import javax.swing.BorderFactory;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
+
 
 import GameCore.Fight;
 import GameCore.Warrior;

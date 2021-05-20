@@ -12,8 +12,10 @@ public class RankingWindow extends JFrame{
 	private JScrollPane jsp;
 	
 	public RankingWindow(){
+		//Obtenemos los datos con una consulta y devolvemos el resultado
 		String []nomCol= {"Battle ID","Player ID", "Warrior ID", "Weapon ID", "Opponent Id", "Opponent Weapon ID","Injures Caused","Injures Suffered", "Battle Points"};
 		String [][]datos= SQLCore.Querys.getRanking();
+		//Creamos la tabla para mostrar los Datos
 		taula= new JTable(datos,nomCol);
 		taula.setRowHeight(24);
 		taula.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
