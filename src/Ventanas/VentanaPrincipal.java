@@ -3,6 +3,7 @@ package Ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import GameCore.Warrior;
 import GameCore.Weapon;
@@ -29,17 +32,20 @@ import SQLCore.Querys;
 public class VentanaPrincipal extends JFrame {
 	private static JButton bChooseCh, bChooseWe, bRanking, bFight, bClearConsole;
 	private int w;
-	private JPanel content,topPanel, fightPanel;
+	private JPanel content,topPanel, fightPanel,consolePanel;
 	private static WarriorPanel panel1;
 	private static WarriorPanel panel2;
 	private static Warrior warrior1,warrior2;
 	private Warrior[] warriorList;
 	private static Weapon weapon1, weapon2;
+	private JTextArea console;
+	private JScrollPane jsp;
 	
 	public VentanaPrincipal() {
 		//TopPanel 
 		topPanel=new JPanel();
 		fightPanel=new JPanel();
+		consolePanel= new JPanel();
 		bChooseCh=new JButton("Choose Character");
 		bChooseWe=new JButton("Choose Weapon");
 		bRanking=new JButton("Ranking");
@@ -90,14 +96,32 @@ public class VentanaPrincipal extends JFrame {
 		//personaje
 		//end
 		//Botones de Fight y Clear Console
+		bFight=new JButton("Fight");
+		fightPanel.add(bFight);
+		bClearConsole=new JButton("Clear Console");
+		bClearConsole.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				console.setText("");
+			}
+			
+		});
+		fightPanel.add(bClearConsole);
 		
+		console=new JTextArea("",8,60);
+		jsp=new JScrollPane(console);
+		fightPanel.add(jsp);
+		fightPanel.setPreferredSize(new Dimension(100,200));
 		
 		this.add(topPanel,BorderLayout.PAGE_START);
 		this.add(panel1,BorderLayout.LINE_START);
 		this.add(panel2,BorderLayout.LINE_END);
+		this.add(fightPanel,BorderLayout.PAGE_END);
+		//this.add(consolePanel,BorderLayout.PAGE_END);
 		this.setTitle("Projecte Batalla");
-		this.setSize(770,600);
-		this.setMinimumSize(new Dimension(770, 600));
+		this.setSize(770,700);
+		this.setMinimumSize(new Dimension(770, 700));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		/*
