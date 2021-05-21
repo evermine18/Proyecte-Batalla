@@ -77,8 +77,8 @@ public class EndFightWindow extends JFrame implements WindowListener{
 		this.add(panel1,BorderLayout.PAGE_START);
 		this.add(buttons,BorderLayout.CENTER);
 		this.setTitle("Projecte Batalla");
-		this.setSize(200,150);
-		this.setMinimumSize(new Dimension(200, 150));
+		this.setSize(220,150);
+		this.setMinimumSize(new Dimension(220, 150));
 		this.setVisible(true);
 	}
 	public void CloseWindow() {

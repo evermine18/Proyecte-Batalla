@@ -148,7 +148,6 @@ public static void InsertarBattle(int warrior_id,int weapon_id,int opponent_id,i
 			System.out.println("MYSQL: No se ha podido ejecutar la consulta");
 			return null;
 		}
-		//System.out.println(weapons[4].getWeaponName()+ "MorenoMaricon");
 		return topPlayers;
 	}
 	
